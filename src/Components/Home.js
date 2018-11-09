@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 
-class TaskList extends Component {
+class Home extends Component {
 
   render() {
     return (
       <div>
+        HOME
       </div>
     )
   }
 }
 
-export default TaskList;
+export default Home;
