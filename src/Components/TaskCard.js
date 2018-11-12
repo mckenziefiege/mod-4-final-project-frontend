@@ -4,7 +4,8 @@ class TaskCard extends Component {
 
   render() {
     return (
-      <div>
+      <div className='ui segment'>
+      Task Item
       </div>
     )
   }
