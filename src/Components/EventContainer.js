@@ -4,29 +4,15 @@ import EventCard from './EventCard.js'
 import EventPage from './EventPage.js'
 
 class EventContainer extends Component {
-  state = {
-    events: []
-  }
-
-  componentDidMount () {
-    this.getEvents()
-  }
 
   handleEventCardClick = (e) => {
     console.log('Event Id:', e.target.id);
     return <Link to={`/events/${e.target.id}`}></Link>
   }
 
-  getEvents = () => {
-    fetch('http://localhost:3000/events')
-      .then(resp => resp.json())
-      .then(data => this.setState({
-        events: data
-      }))
-  }
 
   getAllEventCards = () => {
-    const eventCards = this.state.events.map(eventObj => <EventCard key={eventObj.id} eventObj={eventObj} handleEventCardClick={this.handleEventCardClick}/>)
+    const eventCards = this.props.events.map(eventObj => <EventCard key={eventObj.id} eventObj={eventObj} handleEventCardClick={this.handleEventCardClick}/>)
     return(
       <div>
       <h2>Events:</h2>
@@ -37,16 +23,11 @@ class EventContainer extends Component {
 
   getEventPage = (props) => {
     const id = parseInt(props.match.params.id)
-    console.log(this.state.events)
-    let obj = this.state.events.find(eventObj => eventObj.id === id)
-    return <EventPage eventObj={obj} />
+    let obj = this.props.events.find(eventObj => eventObj.id === id)
+    return <EventPage user={this.props.user} eventObj={obj} />
   }
 
-
-
-
   render() {
-    console.log(this.state.events)
     return (
       <div className='ui segment'>
       <Switch>

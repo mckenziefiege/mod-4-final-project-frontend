@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 class SignUp extends Component {
 
-  render() {
+  showSignUpForm = () => {
     return (
       <div id='signup-container' className="ui middle aligned center aligned grid">
         <div className="column">
@@ -11,7 +12,7 @@ class SignUp extends Component {
               Sign Up for an account
             </div>
           </h2>
-      <form className="ui form">
+      <form onSubmit={this.props.handleSignup} className="ui form">
       <div className="field">
         <label>First Name</label>
         <input type="text" name="first-name" placeholder="First Name"/>
@@ -26,7 +27,7 @@ class SignUp extends Component {
       </div>
       <div className="field">
         <label>Password</label>
-        <input type="text" name="password" placeholder="Password"/>
+        <input type="password" name="password" placeholder="Password"/>
       </div>
       <div className="field">
         <label>City</label>
@@ -39,6 +40,14 @@ class SignUp extends Component {
       <button className="ui primary button" type="submit">Submit</button>
       </form>
       </div>
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div>
+      {localStorage.getItem('token') ? <Redirect to='/userfeed' /> : this.showSignUpForm() }
       </div>
     )
   }
