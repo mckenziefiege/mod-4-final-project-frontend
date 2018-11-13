@@ -6,7 +6,7 @@ class NavBar extends Component {
   renderHomeButton = () => {
     return (
       <div className='item'>
-        <Link to="/"><button className='ui primary button'>
+        <Link to={ localStorage.getItem('token') ? '/userfeed' : '/'}><button className='ui primary button'>
           Home
         </button></Link>
       </div>

@@ -15,10 +15,7 @@ class ProfileSnippet extends Component {
         </div>
       </div>
       <div className='extra content'>
-        <a>
-          <i aria-hidden='true' className='user icon' />
-          16 Friends
-        </a>
+
       </div>
     </div>
     )

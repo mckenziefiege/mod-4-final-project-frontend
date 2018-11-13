@@ -1,34 +1,33 @@
 import React, { Component } from 'react'
 import TaskList from './TaskList.js'
 import AttendeeList from './AttendeeList.js'
+import { withRouter } from 'react-router-dom'
 
 class EventPage extends Component {
-  constructor(props){
-    super(props)
-    console.log("props", props)
-    this.state ={
-      currentEvent: props.eventObj
-    }
+
+  getUserInvite = () => {
+    return (this.props.eventObj && this.props.eventObj.invites.filter(invite => invite.user_id === this.props.user.id)[0])
   }
 
   render() {
-    console.log(this.state)
-    let check = (this.props.eventObj ? !(this.props.eventObj.users.includes(this.props.user)) : false)
+    console.log('EventPage props', this.props)
+    let userIds = (this.props.eventObj ? this.props.eventObj.users.map(user => user.id) : [])
+    let check = (this.props.eventObj ? (userIds.includes(this.props.user.id)) : false)
     return (
       <div>
       <h1>{this.props.eventObj && this.props.eventObj.name}</h1>
-      { check && <button className="ui button">Join Event</button>}
+      {!check && localStorage.getItem('token') ? <button onClick={(e) => this.props.createInvite(e, this.props.eventObj)} className="ui button">Join Event</button> : null}
       <p>
       {this.props.eventObj && this.props.eventObj.description}
       </p>
       <p>
       {this.props.eventObj && this.props.eventObj.location}
       </p>
-      <TaskList user={this.props.user} eventobj={this.props.eventObj} />
+      <TaskList user={this.props.user} inviteObj={this.getUserInvite()} eventobj={this.props.eventObj} isAttending={check} createTask={this.props.createTask}/>
       <AttendeeList attendees={this.props.eventObj && this.props.eventObj.users}/>
       </div>
     )
   }
 }
 
-export default EventPage;
+export default withRouter(EventPage);

@@ -21,11 +21,11 @@ class TaskList extends Component {
   }
 
   render() {
-  
+
     return (
       <div className='ui segment'>
-      <button onClick={this.toggleTaskForm} className='ui button'>Create New Task</button>
-      {this.state.taskForm && <TaskForm />}
+      {!this.props.check && <button onClick={this.toggleTaskForm} className='ui button'>Create New Task</button>}
+      {this.state.taskForm && <TaskForm createTask={this.props.createTask} inviteObj={this.props.inviteObj}/>}
       <h3>Task List:</h3>
       {this.getTasks()}
       </div>

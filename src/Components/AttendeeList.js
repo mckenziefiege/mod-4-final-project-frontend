@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Image, List } from 'semantic-ui-react'
 import AttendeeCard from './AttendeeCard.js'
 
 class AttendeeList extends Component {
@@ -11,7 +10,7 @@ class AttendeeList extends Component {
   }
 
   render() {
-  
+
     return (
       <div>
       <h2>Attendee List:</h2>
