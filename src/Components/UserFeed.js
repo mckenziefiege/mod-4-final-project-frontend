@@ -15,12 +15,13 @@ class Userfeed extends Component {
   }
 
   render() {
+    console.log('USER PROPS', this.props);
     return (
       <div>
       <ProfileSnippet user={this.props.user}/>
       <button onClick={this.toggleEventForm} className="ui button">Create New Event</button>
       {this.state.eventForm && <EventForm />}
-      <EventContainer />
+      <EventContainer events={this.props.events}/>
       </div>
     )
   }

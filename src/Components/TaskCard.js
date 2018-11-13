@@ -5,7 +5,7 @@ class TaskCard extends Component {
   render() {
     return (
       <div className='ui segment'>
-      Task Item
+      {this.props.taskObj.name}
       </div>
     )
   }
