@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import Login from './Components/Login'
 import Home from './Components/Home.js'
 import SignUp from './Components/SignUp.js'
@@ -19,6 +19,61 @@ class App extends Component {
     localStorage.removeItem("token")
     this.setState({ auth: { currentUser: {} } })
     this.props.history.push("/")
+  }
+
+  createInvite = (e, eventObj) => {
+    let options = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}`},
+      body: JSON.stringify({
+        user_id: this.state.auth.currentUser.id,
+        event_id: eventObj.id,
+        status: true
+      })
+    }
+    fetch('http://localhost:3000/invites', options)
+      .then(resp => resp.json())
+      .then(events => this.setState({
+        events
+      }))
+  }
+
+  createEvent = (e) => {
+    e.preventDefault()
+
+    let options = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}`},
+      body: JSON.stringify({
+        name: e.target.name.value,
+        description: e.target.description.value,
+        location: `${e.target.address.value}, ${e.target.city.value}, ${e.target.state.value} ${e.target.zipcode.value}`,
+        host_id: this.state.auth.currentUser.id,
+        date: new Date(e.target.year.value, e.target.month.value, e.target.day.value, e.target.hour.value, e.target.minute.value, 0)
+      })
+    }
+    fetch('http://localhost:3000/events', options)
+      .then(resp => resp.json())
+      .then(resp => this.setState({
+        events: resp
+      }))
+  }
+
+  createTask = (e) => {
+    e.preventDefault()
+    let options = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}`},
+      body: JSON.stringify({
+        name: e.target.taskname.value,
+        invite_id: e.target.inviteid.value
+      })
+    }
+    fetch('http://localhost:3000/tasks', options)
+      .then(resp => resp.json())
+      .then(events => this.setState({
+        events
+      }))
   }
 
   handleLogin = (e) => {
@@ -71,7 +126,7 @@ class App extends Component {
 
 
   renderUserFeed = () => {
-    return <UserFeed events={this.state.events} user={this.state.auth.currentUser} />
+    return <UserFeed events={this.state.events} user={this.state.auth.currentUser} createEvent={this.createEvent}/>
   }
 
   renderSignup = () => {
@@ -83,7 +138,7 @@ class App extends Component {
   }
 
   renderEventContainer = () => {
-      return <EventContainer events={this.state.events} user={this.state.auth.currentUser} />
+      return <EventContainer events={this.state.events} user={this.state.auth.currentUser} createInvite={this.createInvite} createTask={this.createTask}/>
   }
 
   getallEvents = () => {
@@ -93,7 +148,6 @@ class App extends Component {
       events
     }))
   }
-
 
   componentDidMount () {
     this.getallEvents()
@@ -114,6 +168,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('App state', this.state);
     return (
       <div>
       <NavBar handleLogout={this.handleLogout}/>

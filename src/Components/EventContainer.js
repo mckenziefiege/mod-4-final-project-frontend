@@ -24,10 +24,11 @@ class EventContainer extends Component {
   getEventPage = (props) => {
     const id = parseInt(props.match.params.id)
     let obj = this.props.events.find(eventObj => eventObj.id === id)
-    return <EventPage user={this.props.user} eventObj={obj} />
+    return <EventPage user={this.props.user} eventObj={obj} createInvite={this.props.createInvite} createTask={this.props.createTask}/>
   }
 
   render() {
+    console.log('Event Containter this.props.events', this.props.events);
     return (
       <div className='ui segment'>
       <Switch>

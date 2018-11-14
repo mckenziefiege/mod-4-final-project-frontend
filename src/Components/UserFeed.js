@@ -20,7 +20,7 @@ class Userfeed extends Component {
       <div>
       <ProfileSnippet user={this.props.user}/>
       <button onClick={this.toggleEventForm} className="ui button">Create New Event</button>
-      {this.state.eventForm && <EventForm />}
+      {this.state.eventForm && <EventForm createEvent={this.props.createEvent}/>}
       <EventContainer events={this.props.events}/>
       </div>
     )
