@@ -10,7 +10,7 @@ class TaskList extends Component {
 
   getTasks = () => {
     if(this.props.eventobj) {
-      return this.props.eventobj.tasks.map(task => <TaskCard taskObj={task} key={task.id} />)
+      return this.props.eventobj.tasks.map(task => <TaskCard deleteTask={this.props.deleteTask} user={this.props.user} createAssignment={this.props.createAssignment} taskObj={task} key={task.id} eventObj={this.props.eventobj}/>)
     }
   }
 
@@ -23,10 +23,10 @@ class TaskList extends Component {
   render() {
 
     return (
-      <div className='ui segment'>
-      {!this.props.check && <button onClick={this.toggleTaskForm} className='ui button'>Create New Task</button>}
+      <div id='tasklist' className='ui segment'>
+      {!this.props.check && <button onClick={this.toggleTaskForm} className='ui button'>Suggest an Item</button>}
       {this.state.taskForm && <TaskForm createTask={this.props.createTask} inviteObj={this.props.inviteObj}/>}
-      <h3>Task List:</h3>
+      <h3>Items Suggestions</h3>
       {this.getTasks()}
       </div>
     )

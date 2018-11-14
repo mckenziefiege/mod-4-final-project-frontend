@@ -38,6 +38,10 @@ class SignUp extends Component {
         <label>State</label>
         <input type="text" name="state" placeholder="State"/>
       </div>
+      <div className="field">
+        <label>Image URL</label>
+        <input type="text" name="image" placeholder="http://YourImage.jpeg"/>
+      </div>
       <button className="ui primary button" type="submit">Submit</button>
       </div>
     </form>

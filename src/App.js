@@ -12,13 +12,20 @@ class App extends Component {
   state = {
     events: [],
     auth: { currentUser: {} },
-    page: 0
+    searchTerm: ""
   }
 
   handleLogout = () => {
     localStorage.removeItem("token")
     this.setState({ auth: { currentUser: {} } })
     this.props.history.push("/")
+  }
+
+  handleSearch = (e) => {
+    console.log(e.target.value)
+    this.setState({
+      searchTerm: e.target.value
+    })
   }
 
   createInvite = (e, eventObj) => {
@@ -40,7 +47,6 @@ class App extends Component {
 
   createEvent = (e) => {
     e.preventDefault()
-
     let options = {
       method: 'POST',
       headers: {'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}`},
@@ -49,7 +55,8 @@ class App extends Component {
         description: e.target.description.value,
         location: `${e.target.address.value}, ${e.target.city.value}, ${e.target.state.value} ${e.target.zipcode.value}`,
         host_id: this.state.auth.currentUser.id,
-        date: new Date(e.target.year.value, e.target.month.value, e.target.day.value, e.target.hour.value, e.target.minute.value, 0)
+        date: new Date(e.target.year.value, e.target.month.value, e.target.day.value, e.target.hour.value, e.target.minute.value, 0),
+        image: this.target.image.value
       })
     }
     fetch('http://localhost:3000/events', options)
@@ -74,6 +81,36 @@ class App extends Component {
       .then(events => this.setState({
         events
       }))
+  }
+
+  createAssignment = (task_id, invite_id) => {
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        assignment: {
+          invite_id: invite_id,
+          task_id: task_id,}
+      })
+    }
+    fetch("http://localhost:3000/assignments", options)
+      .then(resp => resp.json())
+      .then(events => this.setState({
+        events
+      }))
+  }
+
+  deleteTask = (id) => {
+    fetch(`http://localhost:3000/tasks/${id}`, {
+      method: "DELETE"
+    })
+    .then(resp => resp.json())
+    .then(events => this.setState({
+      events
+    }))
   }
 
   handleLogin = (e) => {
@@ -111,7 +148,8 @@ class App extends Component {
         city: e.target.city.value,
         state: e.target.state.value,
         username: e.target.username.value,
-        password: e.target.password.value}
+        password: e.target.password.value,
+        image: e.target.image.value}
       })
     }
     fetch('http://localhost:3000/users', options)
@@ -126,7 +164,7 @@ class App extends Component {
 
 
   renderUserFeed = () => {
-    return <UserFeed events={this.state.events} user={this.state.auth.currentUser} createEvent={this.createEvent}/>
+    return <UserFeed searchTerm={this.state.searchTerm} handleSearch={this.handleSearch} events={this.state.events} user={this.state.auth.currentUser} createEvent={this.createEvent}/>
   }
 
   renderSignup = () => {
@@ -138,7 +176,7 @@ class App extends Component {
   }
 
   renderEventContainer = () => {
-      return <EventContainer events={this.state.events} user={this.state.auth.currentUser} createInvite={this.createInvite} createTask={this.createTask}/>
+      return <EventContainer searchTerm={this.state.searchTerm} handleSearch={this.handleSearch} deleteTask={this.deleteTask} createAssignment={this.createAssignment} events={this.state.events} user={this.state.auth.currentUser} createInvite={this.createInvite} createTask={this.createTask}/>
   }
 
   getallEvents = () => {

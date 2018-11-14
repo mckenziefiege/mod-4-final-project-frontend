@@ -16,6 +16,8 @@ class EventPage extends Component {
 
       <div className="ui grid">
         <div className="six wide column">
+          <img src={this.props.eventObj && this.props.eventObj.image} alt="event-image" className='ui image'/>
+          {!check && localStorage.getItem('token') ? <button onClick={(e) => this.props.createInvite(e, this.props.eventObj)} className="ui button">Join Event</button> : null}
           <h1>{this.props.eventObj && this.props.eventObj.name}</h1>
           <p>
             {this.props.eventObj && this.props.eventObj.description}
@@ -27,9 +29,7 @@ class EventPage extends Component {
         </div>
 
       <div className="eight wide column">
-        {!check && localStorage.getItem('token') ? <button onClick={(e) => this.props.createInvite(e, this.props.eventObj)} className="ui button">Join Event</button> : null}
-
-        <TaskList user={this.props.user} inviteObj={this.getUserInvite()} eventobj={this.props.eventObj} isAttending={check} createTask={this.props.createTask}/>
+        <TaskList deleteTask={this.props.deleteTask} createAssignment={this.props.createAssignment} user={this.props.user} inviteObj={this.getUserInvite()} eventobj={this.props.eventObj} isAttending={check} createTask={this.props.createTask}/>
       </div>
       </div>
     )

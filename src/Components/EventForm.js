@@ -92,12 +92,10 @@ class EventForm extends Component {
             <input type="text" name="minute" placeholder="0-59min"/>
           </div>
 
-
           <div className="field">
-          <input type="time" name="time"
-            min="1:00" max="24:00" />
+            <label>Image URL</label>
+            <input type="text" name="image" placeholder="http://YourEventImage.jpeg"/>
           </div>
-
           <div className="field">
             <label>Description</label>
             <input type="text" name="description" placeholder="Description"/>
