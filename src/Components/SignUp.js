@@ -12,7 +12,8 @@ class SignUp extends Component {
               Sign Up for an account
             </div>
           </h2>
-      <form onSubmit={this.props.handleSignup} className="ui form">
+      <form onSubmit={this.props.handleSignup} className="ui form" >
+        <div className="ui stacked secondary segment">
       <div className="field">
         <label>First Name</label>
         <input type="text" name="first-name" placeholder="First Name"/>
@@ -38,9 +39,10 @@ class SignUp extends Component {
         <input type="text" name="state" placeholder="State"/>
       </div>
       <button className="ui primary button" type="submit">Submit</button>
-      </form>
       </div>
-      </div>
+    </form>
+  </div>
+</div>
     )
   }
 

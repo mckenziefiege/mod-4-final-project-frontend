@@ -17,11 +17,12 @@ class Userfeed extends Component {
   render() {
     console.log('USER PROPS', this.props);
     return (
-      <div>
-      <ProfileSnippet user={this.props.user}/>
-      <button onClick={this.toggleEventForm} className="ui button">Create New Event</button>
-      {this.state.eventForm && <EventForm createEvent={this.props.createEvent}/>}
-      <EventContainer events={this.props.events}/>
+      <div className="ui grid">
+      <div className="four wide column"><ProfileSnippet user={this.props.user}/>
+      <button onClick={this.toggleEventForm} className="ui button">Create New Event</button></div>
+      <div className="eight wide column">
+        {this.state.eventForm && <EventForm createEvent={this.props.createEvent}/>}
+      <EventContainer events={this.props.events}/></div>
       </div>
     )
   }

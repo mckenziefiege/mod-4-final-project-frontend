@@ -7,11 +7,11 @@ class Login extends Component {
     return (
       <div className="column">
         <h2 className="ui image header">
-          <div className="content">
+          <div className="content" id="loginheading">
             Log-in to your account
           </div>
         </h2>
-        <form onSubmit={this.props.handleLogin} className="ui large form" >
+        <form onSubmit={this.props.handleLogin} className="ui large form" id="loginform">
           <div className="ui stacked secondary segment">
             <div className="field">
               <div className="ui left icon input">
@@ -29,7 +29,7 @@ class Login extends Component {
           </div>
           <div className="ui error message"></div>
         </form>
-        <div className="ui message">
+        <div className="ui message" id="loginform">
           New User? <Link to="/signup">Sign Up</Link>
         </div>
       </div>

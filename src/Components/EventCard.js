@@ -15,9 +15,11 @@ class EventCard extends Component {
        <Divider />
 
      <Link to={`/events/${this.props.eventObj.id}`}><h1>{this.props.eventObj && this.props.eventObj.name }</h1></Link>
-     <Icon name='calendar alternate outline' /><p>Date & Time: {this.props.eventObj && this.props.eventObj.date}</p>
+
+     <p> Date: <Icon name='calendar alternate outline' />{this.props.eventObj && this.props.eventObj.formatted_date}</p>
+     <p> Time: {this.props.eventObj && this.props.eventObj.time}</p>
      <p> Description: {this.props.eventObj && this.props.eventObj.description}</p>
-     <p> Host: {this.props.eventObj && this.props.eventObj.host_id}</p>
+     <p> Host: {this.props.eventObj && `${this.props.eventObj.host.first_name} ${this.props.eventObj.host.last_name}`}</p>
      <p> Location: {this.props.eventObj && this.props.eventObj.location}</p>
 
      </Container>
