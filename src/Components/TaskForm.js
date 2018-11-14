@@ -13,7 +13,7 @@ class TaskForm extends Component {
           </h2>
       <form onSubmit={this.props.createTask} className="ui form">
       <div className="field">
-        <input type="text" name="taskname" placeholder="Task Name"/>
+        <input type="text" name="taskname" placeholder="Suggest Item"/>
       </div>
       <div className="field">
         <input type="hidden" name="inviteid" value={this.props.inviteObj.id} />

@@ -38,7 +38,10 @@
 }
 
 #signup-container {
-  width: 300px;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
 }
 
 #loginform {
@@ -53,6 +56,30 @@
 }
 
 body {
-  /* background-color: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1526376043067-5af36c35cd6c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=aed342eea1c8593563be90e10c423dfe&auto=format&fit=crop&w=1639&q=80'); */
-  background-color: #E0E0E0;  
+  background-color: #E0E0E0;
+}
+
+.taskname {
+  margin-left: 200px;
+}
+
+#profile-snippet {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+#create-event-button {
+  margin-left: 20px;
+}
+
+#search-div {
+  margin-bottom: 20px;
+}
+
+#tasklist {
+  max-width: 25vw;
+}
+
+#trashcan {
+  margin-left: 5px;
 }

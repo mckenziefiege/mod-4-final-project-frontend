@@ -19,10 +19,10 @@ class Userfeed extends Component {
     return (
       <div className="ui grid">
       <div className="four wide column"><ProfileSnippet user={this.props.user}/>
-      <button onClick={this.toggleEventForm} className="ui button">Create New Event</button></div>
+      <button id="create-event-button" onClick={this.toggleEventForm} className="ui primary button">Create New Event</button></div>
       <div className="eight wide column">
         {this.state.eventForm && <EventForm createEvent={this.props.createEvent}/>}
-      <EventContainer events={this.props.events}/></div>
+      <EventContainer searchTerm={this.props.searchTerm} handleSearch={this.props.handleSearch} events={this.props.events}/></div>
       </div>
     )
   }
