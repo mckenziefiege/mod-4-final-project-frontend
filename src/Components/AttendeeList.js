@@ -14,7 +14,7 @@ class AttendeeList extends Component {
     return (
       <div>
       <h2>Attendee List:</h2>
-      {this.getAttendees()}
+        {this.getAttendees()}
       </div>
     )
   }

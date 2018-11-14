@@ -5,6 +5,7 @@ class AttendeeCard extends Component {
   render() {
     return (
       <div>
+        <p>{this.props.attendeeObj.first_name}</p>
       </div>
     )
   }

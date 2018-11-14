@@ -11,7 +11,7 @@ class Home extends Component {
      <div className="homepage">
        <h1 className="logo">Event Planner</h1>
        <Container className="homepagebox" textAlign='center'>
-       <Segment >
+       <Segment id="loginbox">
        <div className="loginsignup">
        <Link to="/login"><Button primary fluid>Login</Button></Link>
        <Divider horizontal>Or</Divider>
